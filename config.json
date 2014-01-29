@@ -1,0 +1,28 @@
+{
+  "output": "./..",
+  "locals": {
+    "url": "http://localhost:8080",
+    "name": "panic()",
+    "owner": "Brandon Carrell",
+    "description": "Brandon Carrell's personal site"
+  },
+  "plugins": [
+    "./plugins/paginator.coffee",
+    "wintersmith-stylus"
+  ],
+  "require": {
+    "moment": "moment",
+    "_": "lodash",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
+  },
+  "paginator": {
+    "perPage": 3
+  }
+}

@@ -9,14 +9,28 @@ html
 
     title= post.title
     link(rel='stylesheet', href='/css/master.css')
+    link(rel='stylesheet', href='//weloveiconfonts.com/api/?family=zocial')
   body
     header
-      h1 my awesome blog
+      .icon
+        a(href="/")
+          .block
+            span.symbol λ
+      .info
+        h5.name Brandon Carrell
+        div.description
+          h6.description__text developer // internet adventurer
+          .twrapper
+            ul.description__icons
+              li.zocial-github
+              li.zocial-email
+              // li.zocial-guest
 
-    #posts
+    #post-content
       h2= post.title
       != content
-      a(href='/') &laquo; back to index
+    .back
+      a(href='/') go back
 
   script(type='text/javascript', src='//use.typekit.net/hfn1abq.js')
   script(type='text/javascript').

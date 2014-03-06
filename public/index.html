@@ -7,32 +7,57 @@
     <meta name="description" content="Blog and projects">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brandon Carrell</title>
-    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="/css/master.css">
     <link rel="stylesheet" href="//weloveiconfonts.com/api/?family=zocial">
   </head>
   <body>
     <header>
-      <div class="icon"></div>
+      <div class="icon"><a href="/">
+          <div class="block"><span class="symbol">λ</span></div></a></div>
       <div class="info">
         <h5 class="name">Brandon Carrell</h5>
         <div class="description">
-          <h6 class="description__text">λ developer</h6>
-          <ul class="description__icons">
-            <li class="zocial-github"></li>
-            <li class="zocial-email"></li>
-            <li class="zocial-guest"></li>
-          </ul>
+          <h6 class="description__text">developer // internet adventurer</h6>
+          <div class="twrapper">
+            <ul class="description__icons">
+              <li class="zocial-github"></li>
+              <li class="zocial-email"></li>
+              <!-- li.zocial-guest-->
+            </ul>
+          </div>
         </div>
       </div>
     </header>
     <div id="main">
-<h2>Posts</h2>
-<ul id="posts">
-  <li><a href="/posts/second_post.html">second post</a></li>
-  <li><a href="/posts/hello_world.html">hello world</a></li>
-</ul>
+<section>
+  <h3>Posts</h3>
+  <ul id="posts">
+    <li><span class="post__date">
+        <h6>1/2/1970</h6></span><span class="laq">&raquo;</span><span class="post__title"><a href="/posts/second_post.html">second post</a></span></li>
+    <li><span class="post__date">
+        <h6>1/1/1970</h6></span><span class="laq">&raquo;</span><span class="post__title"><a href="/posts/hello_world.html">hello world</a></span></li>
+  </ul>
+</section>
+<section>
+  <h3>Projects</h3>
+  <ul id="projects">
+    <li><span class="project__title"><a href="http://github.com/bcarrell/verify">Verify</a></span><span class="project__lang">.go</span><span class="laq">&raquo;</span><span class="project__desc">A chainable string validation library</span></li>
+    <li><span class="project__title"><a href="http://github.com/bcarrell/tinyjson">TinyJSON</a></span><span class="project__lang">.go</span><span class="laq">&raquo;</span><span class="project__desc">A helper for working with JSON</span></li>
+    <li><span class="project__title"><a href="http://github.com/bcarrell/tvpm">TVPM</a></span><span class="project__lang">.go</span><span class="laq">&raquo;</span><span class="project__desc">A command line "package manager" for tv shows</span></li>
+    <li><span class="project__title"><a href="http://github.com/bcarrell/refurry">Refurry</a></span><span class="project__lang">.js</span><span class="laq">&raquo;</span><span class="project__desc">A web application that builds "cheat sheets"</span></li>
+  </ul>
+</section>
     </div>
+    <footer>
+      <h6>I'm a web developer.</h6>
+      <p></p>I hack on internal automation tools, mostly on the web, for a very
+      large media and communications company.  My interests include
+      functional programming, data visualization, networking, and typography.
+      My weapons of choice are JavaScript, Clojure(Script), and Go.  I write
+      code with Vim on OSX.
+    </footer>
   </body>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
   <script type="text/javascript" src="//use.typekit.net/hfn1abq.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </html>

@@ -8,23 +8,37 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
     title Brandon Carrell
-    link(rel='stylesheet', href='css/master.css')
+    link(rel='stylesheet', href='/css/master.css')
     link(rel='stylesheet', href='//weloveiconfonts.com/api/?family=zocial')
   body
     header
       .icon
+        a(href="/")
+          .block
+            span.symbol λ
       .info
         h5.name Brandon Carrell
         div.description
-          h6.description__text λ developer
-          ul.description__icons
-            li.zocial-github
-            li.zocial-email
-            li.zocial-guest
+          h6.description__text developer // internet adventurer
+          .twrapper
+            ul.description__icons
+              li.zocial-github
+              li.zocial-email
+              // li.zocial-guest
 
     #main
       != content
 
+    footer
+      h6 I'm a web developer.
+      p
+      | I hack on internal automation tools, mostly on the web, for a very
+      | large media and communications company.  My interests include
+      | functional programming, data visualization, networking, and typography.
+      | My weapons of choice are JavaScript, Clojure(Script), and Go.  I write
+      | code with Vim on OSX.
+
+  script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js')
   script(type='text/javascript', src='//use.typekit.net/hfn1abq.js')
   script(type='text/javascript').
     try{Typekit.load();}catch(e){}

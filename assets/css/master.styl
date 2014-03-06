@@ -2,28 +2,60 @@
 
 normalize()
 base()
+typography()
 
-// base styles on everything, for prototyping
-framework()
+[class*="zocial-"]:before
+    font-family: 'zocial', sans-serif
+
+h1, h2, h3, h4, h5, h6
+  font-family myriad
+  font-weight bold
+  text-transform none
+
+body
+  min-width: 15rem
+  max-width: 36rem
+  margin: 0 auto
+  padding: 0 1rem
 
 header
-  background: blue
-  width: 100%
-  text-align: center
+  border-bottom 1px solid light-gray
+  padding 8px
 
-  h1
-    color: white
-    padding: 80px 0
-    font-weight: 300
+.icon
+  size(60 60)
+  background linear-gradient(left, mimosa, orchid)
+  position relative
+  top 4px
+  box-shadow inset 0 0 4px black
+
+.info
+  width 80%
+  margin-left 25px
+
+.icon, .info
+  inline-block()
+
+.name
+  font-weight bold
+
+.description
+  inline-block()
+  width 100%
+  position relative
+
+.description__text
+  font-style italic
+  color gray
+  font-size 90%
+  inline-block()
+
+.description__icons
+  inline-block()
+  inline-list()
+  position absolute
+  right 0px
 
 #posts
-  reset-list()
-  width: 800px
-  margin: 50px auto
-
-  h2
-    margin-bottom: 40px
-
   li
-    margin: 10px 0
-    fs: 1.5em
+    list-style-type none

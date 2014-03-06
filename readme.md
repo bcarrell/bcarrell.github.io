@@ -1,3 +1,10 @@
-# Brandon Carrell's site and blog
+Your Project Name
+=================
+A brief summary of your project
 
-Built with (wintersmith)[http://wintersmith.io]!
+### Setup / Installation
+Some instructions on how to set up and/or install this project
+
+### Staging/Production
+This site is staged at http://example.com [u: admin p: example]    
+This site is live at http://example.com

@@ -1,4 +1,3 @@
-rupture = module.require('rupture')
 jeet = module.require('jeet')
 
 module.exports =

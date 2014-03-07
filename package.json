@@ -1,15 +1,1 @@
-{
-  "name": "bcarrell.github.io",
-  "version": "0.0.0",
-  "description": "personal site",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/bcarrell/bcarrell.github.io.git"
-  },
-  "author": "Brandon Carrell",
-  "homepage": "http://bcarrell.me",
-  "devDependencies": {
-    "rupture": "0.0.2",
-    "jeet": "^5.1.3"
-  }
-}
+../package.json

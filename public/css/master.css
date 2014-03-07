@@ -419,6 +419,14 @@ blockquote cite {
 blockquote cite:before {
   content: '\2014';
 }
+::-moz-selection {
+  background: #efc050;
+  color: #fff;
+}
+::selection {
+  background: #efc050;
+  color: #fff;
+}
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -446,7 +454,7 @@ body {
   padding: 0 1rem;
 }
 pre {
-  font-size: 16px;
+  font-size: 12px;
   font-family: "source-code-pro", Consolas, Courier, 'Bitstream Vera Sans Mono', Consolas, Courier, monospace, serif;
   background: #f4f4f4;
   padding: 6px 10px;
@@ -457,6 +465,12 @@ header {
   border-bottom: 1px solid #e4e4e4;
   padding: 8px;
   text-align: center;
+}
+.gray {
+  color: #e4e4e4;
+}
+.post-content__title {
+  margin-bottom: 40px;
 }
 section {
   margin: 40px 0;
@@ -543,27 +557,21 @@ section {
   margin: 0 auto;
 }
 .description__icons {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: baseline;
   zoom: 1;
-  margin: 0;
-  padding: 0;
+  *display: inline;
+  *vertical-align: auto;
 }
-.description__icons:before,
-.description__icons:after {
-  content: "";
-  display: table;
+.description__icons a {
+  margin: 0 10px;
+  text-decoration: none !important;
 }
-.description__icons:after {
-  clear: both;
+.description__icons a:hover {
+  text-decoration: none !important;
 }
-.description__icons li {
-  float: left;
-  margin-right: 20px;
-  list-style-type: none;
-}
-.description__icons li:last-child {
-  margin-right: 0;
-}
-.description__icons li {
+.description__icons span {
   cursor: pointer;
   color: #63b171;
   -webkit-transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -572,7 +580,7 @@ section {
   -ms-transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
   transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
-.description__icons li:hover {
+.description__icons span:hover {
   -webkit-transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
   -moz-transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
   -o-transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -632,7 +640,7 @@ footer h6 {
   text-align: center;
   margin-bottom: 60px;
 }
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 600px) {
   header {
     margin-top: 40px;
   }
@@ -702,5 +710,8 @@ footer h6 {
   .symbol {
     position: relative;
     top: -3px;
+  }
+  pre {
+    font-size: 17px;
   }
 }

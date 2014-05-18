@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Brandon Carrell">
+  <meta name="description" content="Blog and Projects">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <base href="{{ .Site.BaseUrl }}">
+  <title>{{ .Site.Title }}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="//weloveiconfonts.com/api/?family=zocial">
+</head>
+<body>
+  {{ template "chrome/header.html" }}
+  <div id="post-content">
+    <h6 class="gray">{{ .Date }}</h6>
+    <h2 class="post-content__title">{{ .Title }}</h2>
+    <div>{{ .Content }}</div>
+  </div>
+  <div class="back"><a href="/">go back</a></div>
+
+  {{ template "chrome/footer.html" }}
+  {{ template "chrome/scripts.html" }}
+</body>
+</html>

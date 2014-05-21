@@ -32,27 +32,27 @@ Instead of...
 
 <figure>
 <figcaption>... mutating an Array</figcaption>
-<pre>
+{{% highlight javascript %}}
 var myArray = ['learning', 'functional', 'code'];
 
 for (var i = 0; i < myArray.length; i++) {
   myArray[i] = myArray[i].toUpperCase();
 }
-</pre>
+{{% /highlight %}}
 </figure>
 
 Prefer this...
 
 <figure>
 <figcaption>... mapping over an Array</figcaption>
-<pre>
+{{% highlight javascript %}}
 var upcaseify = function(s) {
     return String.prototype.toUpperCase.call(s);
   },
   myArray;
 
 myArray = ['learning', 'functional', 'code'].map(upcaseify);
-</pre>
+{{% /highlight %}}
 </figure>
 
 See the difference?

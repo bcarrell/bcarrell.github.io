@@ -419,7 +419,7 @@ pre {
   font-family: "source-code-pro", monospace;
   padding: 20px;
   margin: 0;
-  background: #eee; }
+  background: #272822; }
 
 code {
   background: #eee;
@@ -567,6 +567,9 @@ footer {
       display: table; }
     footer .recent-posts:after {
       clear: both; }
+
+.list .recent-post {
+  margin-bottom: 20px; }
 
 @media only screen and (min-width: 720px) {
   footer {
@@ -793,14 +796,6 @@ footer {
     clear: both; }
   .title-standalone:last-child {
     margin-right: 0%; }
-
-.title-standalone::before {
-  position: absolute;
-  content: "";
-  width: 20px;
-  border-top: 1px solid #bbbbbb;
-  bottom: -17px;
-  left: 23%; }
 
 .post__info {
   text-align: center;

@@ -31,9 +31,9 @@
 
   <main class="post">
     <div class="post__info">
-      <h1 class="post__title">A Brief Primer on Functional Thinking</h1>
+      <h1 class="post__title">Functional Thinking Redux</h1>
       <span class="post__date">
-        Sunday, Jan 12, 2014
+        Tuesday, Jan 14, 2014
       </span>
     </div>
     <article class="post__content"><p>Learning functional programming can be a daunting task.  On your quest for
@@ -65,27 +65,27 @@ reductions, composability, referential transparency, and many more.</p>
 
 <figure>
 <figcaption>... mutating an Array</figcaption>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">myArray</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;learning&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;functional&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;code&#39;</span><span style="color: #f8f8f2">];</span>
+<pre>
+var myArray = ['learning', 'functional', 'code'];
 
-<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #a6e22e">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">myArray</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span><span style="color: #f8f8f2">;</span> <span style="color: #a6e22e">i</span><span style="color: #f92672">++</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
-  <span style="color: #a6e22e">myArray</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">i</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">myArray</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">i</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">toUpperCase</span><span style="color: #f8f8f2">();</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+for (var i = 0; i < myArray.length; i++) {
+  myArray[i] = myArray[i].toUpperCase();
+}
+</pre>
 </figure>
 
 <p>Prefer this&hellip;</p>
 
 <figure>
 <figcaption>... mapping over an Array</figcaption>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">upcaseify</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">String.</span><span style="color: #a6e22e">prototype</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">toUpperCase</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">s</span><span style="color: #f8f8f2">);</span>
-  <span style="color: #f8f8f2">},</span>
-  <span style="color: #a6e22e">myArray</span><span style="color: #f8f8f2">;</span>
+<pre>
+var upcaseify = function(s) {
+    return String.prototype.toUpperCase.call(s);
+  },
+  myArray;
 
-<span style="color: #a6e22e">myArray</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;learning&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;functional&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;code&#39;</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">map</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">upcaseify</span><span style="color: #f8f8f2">);</span>
-</pre></div>
-
+myArray = ['learning', 'functional', 'code'].map(upcaseify);
+</pre>
 </figure>
 
 <p>See the difference?</p>

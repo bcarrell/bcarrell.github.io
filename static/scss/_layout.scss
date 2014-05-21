@@ -53,6 +53,12 @@ footer {
   }
 }
 
+.list {
+  .recent-post {
+    margin-bottom: 20px;
+  }
+}
+
 @include break-at(720) {
   footer {
     @include center($maxWidth);
@@ -139,16 +145,6 @@ footer {
 .title-standalone {
   @include col(5/7);
 }
-
-.title-standalone::before {
-  position: absolute;
-  content: "";
-  width: 20px;
-  border-top: 1px solid darken($gray, 20%);
-  bottom: -17px;
-  left: 23%;
-}
-
 
 // ============================================================================
 // Post

@@ -12,6 +12,7 @@ hugo
 
 # deploy
 mv ./public/* .
+rm -rf node_modules public scss
 git add -A
 git commit -m 'Updating blog!'
 git push origin master

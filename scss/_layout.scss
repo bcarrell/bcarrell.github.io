@@ -1,0 +1,193 @@
+// ============================================================================
+// Header
+
+header {
+  border-bottom: 1px solid $gray;
+}
+
+.site-header {
+  @include center($maxWidth);
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 20px auto;
+}
+
+.site-header__name {
+  @include column(4/7);
+}
+
+.site-header__links {
+  @include column(3/7);
+  text-align: right;
+
+  .nav-link {
+    @include column(1/2);
+  }
+}
+
+@include break-at(720) {
+  .site-header {
+    padding-left: inherit;
+    padding-right: inherit;
+  }
+}
+
+// ============================================================================
+// Footer
+
+footer {
+  text-align: center;
+  border-top: 1px solid $gray;
+  padding-top: 40px;
+
+  .online {
+    @include stack();
+    padding-top: 20px;
+    border-top: 1px solid $gray;
+  }
+
+  .recent-posts {
+    @include stack();
+    @include cf();
+    margin-bottom: 50px;
+  }
+}
+
+.list {
+  .recent-post {
+    margin-bottom: 20px;
+  }
+}
+
+@include break-at(720) {
+  footer {
+    @include center($maxWidth);
+    text-align: inherit;
+
+    .online {
+      @include unstack();
+      @include col(2/5);
+      border: none;
+      padding-top: 0;
+    }
+
+    .recent-posts {
+      @include stack();
+      @include col(3/5);
+    }
+  }
+}
+
+
+// ============================================================================
+// Index
+
+.outline {
+  padding: 4px;
+  border-radius: 2px;
+  border: 1px solid $green;
+}
+
+.splash {
+  @include cf();
+
+  .splash__img {
+    @include stack();
+    text-align: center;
+  }
+
+  .splash__intro {
+    @include stack();
+
+    h3 {
+      text-align: center;
+    }
+  }
+}
+
+@include break-at(720) {
+  .splash {
+    .splash__img {
+      @include unstack();
+      @include col(2/7);
+      text-align: left;
+    }
+
+    .splash__intro {
+      @include unstack();
+      @include col(5/7);
+      position: relative;
+      top: -18px;
+
+      h3 {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.date {
+  font-family: $codeFontStack;
+  color: darken($gray, 40%);
+  @include font-size(1.4);
+}
+
+.date-standalone {
+  @include col(2/7);
+  position: relative;
+  top: 7px;
+}
+
+.post-element {
+  position: relative;
+}
+
+.title-standalone {
+  @include col(5/7);
+}
+
+// ============================================================================
+// Post
+
+.post__info {
+  text-align: center;
+  position: relative;
+}
+
+.post__title {
+  margin-bottom: 25px;
+  color: $darkblue;
+}
+
+.post__content {
+  margin-top: 60px;
+}
+
+.post__date {
+  color: darken($gray, 40%);
+}
+
+@include break-at(720) {
+  .post__date::before {
+    position: absolute;
+    content: "";
+    width: 100px;
+    border-top: 1px solid darken($gray, 20%);
+    bottom: 14px;
+    left: 20%;
+  }
+
+  .post__date::after {
+    position: absolute;
+    content: "";
+    width: 100px;
+    border-top: 1px solid darken($gray, 20%);
+    bottom: 14px;
+    right: 20%;
+  }
+}
+
+.talk {
+  margin-top: 100px;
+  text-align: center;
+}

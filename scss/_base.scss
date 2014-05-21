@@ -1,0 +1,121 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  @include font-size(1.8);
+  line-height: 1.5;
+  font-family: $bodyFontStack;
+  margin-bottom: 70px;
+}
+
+@include break-at(720) {
+  body {
+    @include font-size(2.0);
+  }
+}
+
+main {
+  @include center($maxWidth);
+  padding: 8px;
+  margin-top: 40px;
+  margin-bottom: 25px;
+}
+
+@include break-at(720) {
+  main {
+    padding: inherit;
+    margin-top: 100px;
+    margin-bottom: 80px;
+  }
+
+  .main-posts, .post {
+    margin-top: 60px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headlineFontStack;
+  font-weight: lighter;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  @include font-size(4.4);
+  line-height: 1.2;
+}
+
+h2 {
+  @include font-size(4.2);
+}
+
+h3 {
+  @include font-size(2.6);
+}
+
+h4, h5 {
+  @include font-size(2.0);
+}
+
+h6 {
+  @include font-size(1.8);
+}
+
+small {
+  @include font-size(1.3);
+}
+
+a {
+  text-decoration: none;
+  color: $blue;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $orange;
+    text-decoration: none;
+  }
+}
+
+pre {
+  @include font-size(1.4);
+  font-family: $codeFontStack;
+  padding: 20px;
+  margin: 0;
+  background: $monokai;
+}
+
+code {
+  background: $gray;
+  padding: 0 6px;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+
+  figcaption {
+    background: darken($gray, 10%);
+    font-family: $codeFontStack;
+    @include font-size(1.5);
+    padding: 8px 10px;
+  }
+}
+
+blockquote {
+  border-left: 3px solid $orange;
+  padding-left: 8px;
+}
+
+.list {
+  list-style-type: none;
+  margin: 15px 0;
+  padding: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+    font-family: $headlineFontStack;
+  }
+}
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Brandon Carrell">
+  <meta name="description" content="Blog and Projects">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <base href="{{ .Site.BaseUrl }}">
+  <title>{{ .Site.Title }}</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  {{ template "chrome/header.html" }}
+  <main class="main-posts">
+    <h2>Posts</h2>
+    <ul class="list">
+    {{ range .Data.Pages }}
+    {{ .Render "list" }}
+    {{ end }}
+    </ul>
+  </main>
+
+  {{ template "chrome/scripts.html" }}
+</body>
+</html>

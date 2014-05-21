@@ -30,29 +30,30 @@ Functional thinking prefers you to consider your data in an *elemental* way.
 
 Instead of...
 
-```javascript
+<figure>
+<figcaption>... mutating an Array</figcaption>
+<pre>
 var myArray = ['learning', 'functional', 'code'];
-var upcaseify = String.prototype.toUpperCase;
 
 for (var i = 0; i < myArray.length; i++) {
-  myArray[i] = upcaseify.call(myArray[i]);
+  myArray[i] = myArray[i].toUpperCase();
 }
-
-console.log(myArray);
-// [ 'LEARNING', 'FUNCTIONAL', 'CODE' ]
-```
+</pre>
+</figure>
 
 Prefer this...
-```javascript
-var myArray = ['learning', 'functional', 'code'];
-var upcaseify = function(s) {
-  return String.prototype.toUpperCase.call(s);
-};
 
-myArray = myArray.map(upcaseify);
-console.log(myArray);
-// [ 'LEARNING', 'FUNCTIONAL', 'CODE' ]
-```
+<figure>
+<figcaption>... mapping over an Array</figcaption>
+<pre>
+var upcaseify = function(s) {
+    return String.prototype.toUpperCase.call(s);
+  },
+  myArray;
+
+myArray = ['learning', 'functional', 'code'].map(upcaseify);
+</pre>
+</figure>
 
 See the difference?
 

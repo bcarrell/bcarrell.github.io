@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Beginners on  </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/beginners/index.xml</link>
+    
+    
+    
+    <updated>Sun, 12 Jan 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>A Brief Primer on Functional Thinking</title>
+      <link>http://localhost:1313/posts/functional_thinking</link>
+      <pubDate>Sun, 12 Jan 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/posts/functional_thinking</guid>
+      <description>&lt;p&gt;Learning functional programming can be a daunting task.  On your quest for
+enlightenment, you&amp;rsquo;re likely to be bombarded with a slew of new, unfamiliar
+terms like &lt;em&gt;currying&lt;/em&gt; and &lt;em&gt;higher-order functions&lt;/em&gt; and &lt;em&gt;partial application&lt;/em&gt;
+and &lt;em&gt;referential transparency&lt;/em&gt;.  The first thing you should know about
+functional programming is that it has a very simple, intuitive definition,
+and that most of these new, scary words can be regarded as techniques to
+achieve the goal of functional programming, but they do not define what
+functional programming is.  The primary characteristic
+of functional code is simply this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Functional code is code which does not modify or rely upon the surrounding
+environment.  That is, &lt;strong&gt;purely functional code is code without side-effects&lt;/strong&gt;.
+Functional thinking requires the programmer to regard side-effects as poison and take as
+many steps as possible to minimize it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In practice, most codebases that regard themselves as functional contain
+side-effecting functions.  Side effects are everywhere: database connections
+or file reading and writing.  But functional code seeks to minimize that and
+employs a lot of techniques you may have read about to achieve that: maps,
+reductions, composability, referential transparency, and many more.&lt;/p&gt;
+
+&lt;p&gt;Functional thinking prefers you to consider your data in an &lt;em&gt;elemental&lt;/em&gt; way.&lt;/p&gt;
+
+&lt;p&gt;Instead of&amp;hellip;&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;... mutating an Array&lt;/figcaption&gt;
+&lt;pre&gt;
+var myArray = [&#39;learning&#39;, &#39;functional&#39;, &#39;code&#39;];
+
+for (var i = 0; i &lt; myArray.length; i++) {
+  myArray[i] = myArray[i].toUpperCase();
+}
+&lt;/pre&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Prefer this&amp;hellip;&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;... mapping over an Array&lt;/figcaption&gt;
+&lt;pre&gt;
+var upcaseify = function(s) {
+    return String.prototype.toUpperCase.call(s);
+  },
+  myArray;
+
+myArray = [&#39;learning&#39;, &#39;functional&#39;, &#39;code&#39;].map(upcaseify);
+&lt;/pre&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;See the difference?&lt;/p&gt;
+
+&lt;p&gt;In the first example, we&amp;rsquo;re muddying our thoughts of the problem.
+We&amp;rsquo;re distracting our primitive monkey brains with secondary concepts like
+managing indices or lengths of the array when really all we want to do is take
+a &lt;em&gt;collection&lt;/em&gt; of things and do &lt;em&gt;something&lt;/em&gt; to each one.  As long as we can
+perform an operation to one thing, we can perform that operation on many things
+that fit the same criteria.  We don&amp;rsquo;t care about the size of the collection or
+any other properties about it, because we framed our thought at the elemental
+level.&lt;/p&gt;
+
+&lt;p&gt;Of course, the example above yields a lot of other benefits that might not
+immediately jump at you.  The map example demonstrates immutability.  The
+looping construct modifies each element in the existing instance of the array.
+The map function creates a new array and replaces the existing array with an
+entirely new one.  This has a lot of very important benefits that you will
+discover later.&lt;/p&gt;
+
+&lt;p&gt;Gaining the benefits of functional programming doesn&amp;rsquo;t require you to &lt;code&gt;rm -rf&lt;/code&gt;
+your entire codebase and start over.  Instead, start small.  Use &lt;code&gt;map&lt;/code&gt; instead
+of looping constructs.  Write small functions that you can build larger
+systems with.  When you need an aggregate over a collection, don&amp;rsquo;t create a
+&lt;code&gt;sum&lt;/code&gt; variable and add to it, use a reduction.  Think with values, group those
+values into logical collections, and apply functions across those values by
+thinking in an elemental way.  Think with data.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

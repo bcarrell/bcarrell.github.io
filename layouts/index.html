@@ -9,58 +9,25 @@
   <base href="{{ .Site.BaseUrl }}">
   <title>{{ .Site.Title }}</title>
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="//weloveiconfonts.com/api/?family=zocial">
 </head>
 <body>
   {{ template "chrome/header.html" }}
-  <section>
-    <h3>Posts</h3>
-    <ul id="posts">
-      {{ range .Data.Pages }}
-      <li>
-        <span class="post__date">
-          <h6>{{ .Title }}</h6>
-        </span>
-        <span class="laq">&raquo;</span>
-        <span class="post__title">
-          <a href="{{ .Permalink }}">{{ .Date }}</a>
-        </span>
-      </li>
-      {{ end }}
-    </ul>
-  </section>
+  <main>
+    <section class="splash">
+      <div class="splash__img">
+        <img class="outline" src="/img/me.jpeg" />
+      </div>
+      <div class="splash__intro">
+        <h3>I'm a software engineer — at <a href="http://www.comcast.com">Comcast</a>.</h3>
+        <p>My interests include functional programming, homoiconic languages,
+        and concurrent computing.  My favorite tools are Clojure[Script], JavaScript,
+        Go, Vim, and OSX.  If you'd like to reach out about an interesting topic, be sure to send me an
+        email.  I'm always listening.</p>
+      </div>
+    </section>
+  </main>
 
-  <section>
-    <h3>Projects</h3>
-    <ul id="projects">
-      <li>
-        <span class="project__title">
-          <a href="http://github.com/bcarrell/verify">Verify</a>
-        </span>
-        <span class="project__lang">.go</span>
-        <span class="laq">&raquo;</span>
-        <span class="project__desc">A chainable string validation library</span>
-      </li>
-      <li>
-        <span class="project__title">
-          <a href="http://github.com/bcarrell/tinyjson">TinyJSON</a>
-        </span>
-        <span class="project__lang">.go</span>
-        <span class="laq">&raquo;</span>
-        <span class="project__desc">A helper for working with JSON in http handlers</span>
-      </li>
-      <li>
-        <span class="project__title">
-          <a href="http://github.com/bcarrell/tvpm">TVPM</a>
-        </span>
-        <span class="project__lang">.go</span>
-        <span class="laq">&raquo;</span>
-        <span class="project__desc">A command line `package manager` for tv shows on Usenet</span>
-      </li>
-    </ul>
-  </section>
-
-  {{ template "chrome/footer.html" }}
+  {{ template "chrome/footer.html" . }}
   {{ template "chrome/scripts.html" }}
 </body>
 </html>

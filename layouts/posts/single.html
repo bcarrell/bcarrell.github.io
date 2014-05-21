@@ -9,18 +9,22 @@
   <base href="{{ .Site.BaseUrl }}">
   <title>{{ .Site.Title }}</title>
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="//weloveiconfonts.com/api/?family=zocial">
 </head>
 <body>
   {{ template "chrome/header.html" }}
-  <div id="post-content">
-    <h6 class="gray">{{ .Date }}</h6>
-    <h2 class="post-content__title">{{ .Title }}</h2>
-    <div>{{ .Content }}</div>
-  </div>
-  <div class="back"><a href="/">go back</a></div>
+  <main class="post">
+    <div class="post__info">
+      <h1 class="post__title">{{ .Title }}</h1>
+      <span class="post__date">
+        {{ .Date.Format "Monday, Jan 2, 2006" }}
+      </span>
+    </div>
+    <article class="post__content">{{ .Content }}</article>
+    <aside class="talk">
+      <h5>Want to talk about this post? <br/>Send me an <a href="mailto:brandoncarrell@gmail.com">email</a>.</h5>
+    </aside>
+  </main>
 
-  {{ template "chrome/footer.html" }}
   {{ template "chrome/scripts.html" }}
 </body>
 </html>

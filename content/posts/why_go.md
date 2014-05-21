@@ -71,4 +71,4 @@ applications.  However, the spirit of Go definitely nods in the direction of
 the functional ideal:  simplicity and ease of reasoning.  Software development
 doesn't stop at `:wq`, and I think you'll find that Go's idioms and standard
 arsenal support the breadth of the development cycle.  Give it a try; I think
-you'll find that .
+you'll find that a lot of situations can be solved easily with Go.

@@ -1,4 +1,7 @@
-echo -e "\033[0;32mDeploying updates to Github...\033[0m"
+echo "\033[0;32mDeploying updates to Github...\033[0m"
+
+# remove old
+rm -rf css img index.html index.xml posts scss tags sitemap.xml
 
 # deps
 npm install

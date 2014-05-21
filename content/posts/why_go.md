@@ -1,6 +1,6 @@
 ---
 Title: "Reasons Why a Functional Programmer Might Embrace Go"
-Date: "2014-01-12"
+Date: "2014-05-21"
 Description: "Why Go?"
 Tags: ["functional programming", "go"]
 ---
@@ -8,7 +8,7 @@ Tags: ["functional programming", "go"]
 I believe that functional programming as a paradigm brings a lot of really,
 really important ideas to the table, but if I had to summarize the most
 important reason to adopt a functional programming style it would be:
-functional programming techniques foster simplicity and an easier way to reason
+functional programming techniques encourage simplicity and an easier way to reason
 about, develop, test, and maintain software.  Predicting the behavior of programs
 is, I would argue, much easier when the program is designed in a functional way.
 

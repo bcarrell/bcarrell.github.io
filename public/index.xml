@@ -3,7 +3,7 @@
   <channel>
       <title>Recent Content on  </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://localhost:1313/index.xml</link>
+    <link>http://bcarrell.me/index.xml</link>
     
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>A Brief Primer on Functional Thinking</title>
-      <link>http://localhost:1313/posts/functional_thinking</link>
+      <link>http://bcarrell.me/posts/functional_thinking</link>
       <pubDate>Sun, 12 Jan 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://localhost:1313/posts/functional_thinking</guid>
+      <guid>http://bcarrell.me/posts/functional_thinking</guid>
       <description>&lt;p&gt;Learning functional programming can be a daunting task.  On your quest for
 enlightenment, you&amp;rsquo;re likely to be bombarded with a slew of new, unfamiliar
 terms like &lt;em&gt;currying&lt;/em&gt; and &lt;em&gt;higher-order functions&lt;/em&gt; and &lt;em&gt;partial application&lt;/em&gt;

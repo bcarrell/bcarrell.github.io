@@ -88,6 +88,139 @@ you&amp;rsquo;ll find that a lot of situations can be solved easily with Go.&lt;
     </item>
     
     <item>
+      <title>vim-fireplace &#43; reloaded</title>
+      <link>http://bcarrell.me/posts/fireplace</link>
+      <pubDate>Wed, 21 May 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://bcarrell.me/posts/fireplace</guid>
+      <description>
+
+&lt;p&gt;It&amp;rsquo;s no secret that most Clojure developers use Emacs.  It&amp;rsquo;s a Lisp machine;
+no one can argue that.  I&amp;rsquo;ve been tempted by the much-lauded Emacs+Evil combination.
+But I&amp;rsquo;m on team vim, and programming Clojure in 2014 with vim-fireplace is awesome.&lt;/p&gt;
+
+&lt;p&gt;Just as awesome is Stuart Sierra&amp;rsquo;s &lt;a href=&#34;http://www.google.com&#34;&gt;Reloaded&lt;/a&gt; workflow and
+its smarter &lt;code&gt;require&lt;/code&gt; logic.  The workflow also integrates perfectly with his
+&lt;a href=&#34;https://github.com/stuartsierra/component&#34;&gt;Component&lt;/a&gt; library.  It turns into
+a pretty seamless experience where you can reload code freely without incurring
+the startup penalty of the JVM.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_0&#34;&gt;A Crash Course on Reloaded/Component&lt;/h3&gt;
+
+&lt;p&gt;Start with your &lt;code&gt;project.clj&lt;/code&gt;, like so:&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;project.clj&lt;/figcaption&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:profiles&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:dev&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:dependencies&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[[org.clojure/tools.namespace&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;0.2.4&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]]&lt;/span&gt;
+                  &lt;span style=&#34;color: #e6db74&#34;&gt;:source-paths&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;dev&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Since you added a &lt;code&gt;dev&lt;/code&gt; source-path in that configuration, include a &lt;code&gt;user.clj&lt;/code&gt;
+file within.  This file will support your fancy new Reloaded/Component workflow
+by including a bunch of functions automatically at REPL startup.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;dev/user.clj&lt;/figcaption&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ns &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;user&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:require&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[com.stuartsierra.component&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:as&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;component]&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;[clojure.tools.namespace.repl&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:refer&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[refresh&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refresh-all]]&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;[yourproject.system&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:refer&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[dev-system]]))&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;system&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;nil)&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;init&lt;/span&gt;
+  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Constructs the current development system.&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;alter-var-root&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;system&lt;/span&gt;
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(constantly (&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;dev-system&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:port&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;8080&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}))))&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;start&lt;/span&gt;
+  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Starts the current development system.&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;alter-var-root&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;system&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;component/start))&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;stop&lt;/span&gt;
+  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Shuts down and destroys the current development system.&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;alter-var-root&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;system&lt;/span&gt;
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;fn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[s]&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(when s&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;component/stop&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;s)))))&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;go&lt;/span&gt;
+  &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Initializes the current development system and starts it running.&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;init&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;start&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;reset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;stop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;refresh&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:after&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;user/go&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;This is pretty vanilla stuff, leveraging Component and Reloaded.  The important
+part is that we &lt;code&gt;require&lt;/code&gt; a system from our project.  For simplicity, let&amp;rsquo;s
+assume the system is a single webserver component, but in normal cases you&amp;rsquo;d want to
+weave together various components (database, cache, etc.).&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s our system:&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;system.clj&lt;/figcaption&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;dev-system&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:keys&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[port]}]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;component/system-map&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;:webserver&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;server/new-webserver&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;port)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;And here&amp;rsquo;s our webserver component, using &lt;code&gt;http-kit&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;webserver.clj&lt;/figcaption&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defrecord &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Webserver&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[port&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler]&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;component/Lifecycle&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;start&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[component]&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(println &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;;; Starting http-kit webserver...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(assoc component&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:server&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;http/run-server&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:port&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;port})))&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;stop&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[component]&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(when-let [server&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:server&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;component)]&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;(println &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;;; Stopping server in 100ms...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;server&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:timeout&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))))&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;new-webserver&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;([port]&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;new-webserver&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;port&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;app&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;([port&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler]&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Webserver.&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;port&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Now that we have everything tied together, we can simply do &lt;code&gt;(go)&lt;/code&gt; at our REPL
+to kick the whole thing off.  When we want to safely reload our code, we can
+do &lt;code&gt;(reset)&lt;/code&gt;, which is essentially a supreme version of &lt;code&gt;(require ... :reload)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;What about vim?&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;vim-fireplace&lt;/code&gt; comes with support for the traditional code reload method by using the motion &lt;code&gt;cpr&lt;/code&gt;, but
+&lt;a href=&#34;https://github.com/clojure/tools.namespace#reloading-code-motivation&#34;&gt;this is very brittle&lt;/a&gt;, and now
+we have all of this awesome Reloaded/Component stuff set up, so let&amp;rsquo;s tie it together with some secret sauce.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;.vimrc&lt;/figcaption&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;nnoremap&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;Leader&amp;gt;fr&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:call&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fireplace#session_eval(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;user/reset&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Map that to whatever you want, but most importantly, when you have a REPL connected,
+you can now call &lt;code&gt;(reset)&lt;/code&gt; with a keybind from vim.  We can bind the rest of our useful &lt;code&gt;user.clj&lt;/code&gt; functions
+similarly by calling &lt;code&gt;session_eval&lt;/code&gt; with some Clojure code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>A Brief Primer on Functional Thinking</title>
       <link>http://bcarrell.me/posts/functional_thinking</link>
       <pubDate>Sun, 12 Jan 2014 00:00:00 UTC</pubDate>

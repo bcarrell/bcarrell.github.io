@@ -1,91 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Recent Content on  </title>
+      <title>Clojure on  </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://bcarrell.me/index.xml</link>
+    <link>http://bcarrell.me/tags/clojure/index.xml</link>
     
     
     
     <updated>Wed, 21 May 2014 00:00:00 UTC</updated>
-    
-    <item>
-      <title>Reasons Why a Functional Programmer Might Embrace Go</title>
-      <link>http://bcarrell.me/posts/why_go</link>
-      <pubDate>Wed, 21 May 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://bcarrell.me/posts/why_go</guid>
-      <description>
-
-&lt;p&gt;I believe that functional programming as a paradigm brings a lot of really,
-really important ideas to the table, but if I had to summarize the most
-important reason to adopt a functional programming style it would be:
-functional programming techniques encourage simplicity and an easier way to reason
-about, develop, test, and maintain software.  Predicting the behavior of programs
-is, I would argue, much easier when the program is designed in a functional way.&lt;/p&gt;
-
-&lt;p&gt;Go is an imperative, strongly-typed language.  It doesn&amp;rsquo;t have any applicative
-functional builtins (that means no &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt;, or &lt;code&gt;filter&lt;/code&gt;).  Go programs
-can be pretty verbose as a result.  It doesn&amp;rsquo;t have persistent or immutable
-data structures (something that I find especially crucial today).  I won&amp;rsquo;t lie;
-I feel a little handicapped in some situations.&lt;/p&gt;
-
-&lt;p&gt;Why should a functional programmer consider using Go, after considering all of the
-aforementioned downsides?&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_0&#34;&gt;&lt;strong&gt;1. Standard tooling fosters simplicity&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Functional programs are easier to reason about, but the process of software
-development doesn&amp;rsquo;t stop at the creation and composition of functions.  We need
-to manage tooling, libraries, infrastructure, and deployments.  Go makes all of
-those aspects of &lt;em&gt;delivering&lt;/em&gt; software easier.  Go has a rich, battle-tested
-standard library.&lt;/p&gt;
-
-&lt;p&gt;My third-party dependencies in my Go programs are close to zero, and this is
-encouraged and decided &lt;em&gt;best practice&lt;/em&gt; within the community.  Less is more.&lt;/p&gt;
-
-&lt;p&gt;When writing a Clojure program, and I want to make an http request, I need to
-make a decision: do I reach for &lt;code&gt;clj-http&lt;/code&gt; or &lt;code&gt;http-kit&lt;/code&gt;?  After that, I add my
-choice to my &lt;code&gt;project.clj&lt;/code&gt; and restart my REPL.  With Go, I &lt;code&gt;import net/http&lt;/code&gt;
-and that&amp;rsquo;s it.  I don&amp;rsquo;t need to make a decision, and neither does your team.&lt;/p&gt;
-
-&lt;p&gt;Deployments with Go are dead simple and speedy.  Compilation is lightning fast,
-and my servers don&amp;rsquo;t need dependencies.  Really, all you need is to &lt;code&gt;scp&lt;/code&gt; your
-binary.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_1&#34;&gt;&lt;strong&gt;2. Channels can be transformative pipelines&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Instead of threading data through composed functions, you can thread data
-through channels and pipe output into downstream channels.  This is essentially
-the goal of functional composition: manipulate data through an &amp;lsquo;assembly line&amp;rsquo;
-of functional transformations.  Instead, with Go, you can compose a
-pipeline through a series of channels and transform your data.  It just requires
-thinking about the situation a little differently.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_2&#34;&gt;&lt;strong&gt;3. Functions are first-class&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Yes, functions are first-class.  Go supports higher-order functions, so, yes,
-you can take functions as parameters and return functions.  You can even return
-multiple functions.  It also supports function literals and closures.  You can
-define your own function types.  There&amp;rsquo;s a lot to work with here.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_3&#34;&gt;&lt;strong&gt;4. Interfaces are really great&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Go interfaces support data-oriented thought: this function takes a &lt;em&gt;thing&lt;/em&gt; (in
-this case an interface) that can take and produce data of the expected types.
-When you use interfaces, you mostly concern yourself with behavior.  Functional
-programmers think in verbs, so interfaces can be an easy transition.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Go is not a functional language, nor does it support the common functional
-applications.  However, the spirit of Go definitely nods in the direction of
-the functional ideal:  simplicity and ease of reasoning.  Software development
-doesn&amp;rsquo;t stop at &lt;code&gt;:wq&lt;/code&gt;, and I think you&amp;rsquo;ll find that Go&amp;rsquo;s idioms and standard
-arsenal support the breadth of the development cycle.  Give it a try; I think
-you&amp;rsquo;ll find that a lot of situations can be solved easily with Go.&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>vim-fireplace &#43; reloaded</title>
@@ -217,92 +139,6 @@ we have all of this awesome Reloaded/Component stuff set up, so let&amp;rsquo;s 
 &lt;p&gt;Map that to whatever you want, but most importantly, when you have a REPL connected,
 you can now call &lt;code&gt;(reset)&lt;/code&gt; with a keybind from vim.  We can bind the rest of our useful &lt;code&gt;user.clj&lt;/code&gt; functions
 similarly by calling &lt;code&gt;session_eval&lt;/code&gt; with some Clojure code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Brief Primer on Functional Thinking</title>
-      <link>http://bcarrell.me/posts/functional_thinking</link>
-      <pubDate>Sun, 12 Jan 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://bcarrell.me/posts/functional_thinking</guid>
-      <description>&lt;p&gt;Learning functional programming can be a daunting task.  On your quest for
-enlightenment, you&amp;rsquo;re likely to be bombarded with a slew of new, unfamiliar
-terms like &lt;em&gt;currying&lt;/em&gt; and &lt;em&gt;higher-order functions&lt;/em&gt; and &lt;em&gt;partial application&lt;/em&gt;
-and &lt;em&gt;referential transparency&lt;/em&gt;.  The first thing you should know about
-functional programming is that it has a very simple, intuitive definition,
-and that most of these new, scary words can be regarded as techniques to
-achieve the goal of functional programming, but they do not define what
-functional programming is.  The primary characteristic
-of functional code is simply this:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Functional code is code which does not modify or rely upon the surrounding
-environment.  That is, &lt;strong&gt;purely functional code is code without side-effects&lt;/strong&gt;.
-Functional thinking requires the programmer to regard side-effects as poison and take as
-many steps as possible to minimize it.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;In practice, most codebases that regard themselves as functional contain
-side-effecting functions.  Side effects are everywhere: database connections
-or file reading and writing.  But functional code seeks to minimize that and
-employs a lot of techniques you may have read about to achieve that: maps,
-reductions, composability, referential transparency, and many more.&lt;/p&gt;
-
-&lt;p&gt;Functional thinking prefers you to consider your data in an &lt;em&gt;elemental&lt;/em&gt; way.&lt;/p&gt;
-
-&lt;p&gt;Instead of&amp;hellip;&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;figcaption&gt;... mutating an Array&lt;/figcaption&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;myArray&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;learning&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;functional&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;];&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;myArray&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;length&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color: #a6e22e&#34;&gt;myArray&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;myArray&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;].&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;toUpperCase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;Prefer this&amp;hellip;&lt;/p&gt;
-
-&lt;figure&gt;
-&lt;figcaption&gt;... mapping over an Array&lt;/figcaption&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;upcaseify&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;String.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;prototype&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;toUpperCase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;call&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-  &lt;span style=&#34;color: #a6e22e&#34;&gt;myArray&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-
-&lt;span style=&#34;color: #a6e22e&#34;&gt;myArray&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;learning&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;functional&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;].&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;upcaseify&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/figure&gt;
-
-&lt;p&gt;See the difference?&lt;/p&gt;
-
-&lt;p&gt;In the first example, we&amp;rsquo;re muddying our thoughts of the problem.
-We&amp;rsquo;re distracting our primitive monkey brains with secondary concepts like
-managing indices or lengths of the array when really all we want to do is take
-a &lt;em&gt;collection&lt;/em&gt; of things and do &lt;em&gt;something&lt;/em&gt; to each one.  As long as we can
-perform an operation to one thing, we can perform that operation on many things
-that fit the same criteria.  We don&amp;rsquo;t care about the size of the collection or
-any other properties about it, because we framed our thought at the elemental
-level.&lt;/p&gt;
-
-&lt;p&gt;Of course, the example above yields a lot of other benefits that might not
-immediately jump at you.  The map example demonstrates immutability.  The
-looping construct modifies each element in the existing instance of the array.
-The map function creates a new array and replaces the existing array with an
-entirely new one.  This has a lot of very important benefits that you will
-discover later.&lt;/p&gt;
-
-&lt;p&gt;Gaining the benefits of functional programming doesn&amp;rsquo;t require you to &lt;code&gt;rm -rf&lt;/code&gt;
-your entire codebase and start over.  Instead, start small.  Use &lt;code&gt;map&lt;/code&gt; instead
-of looping constructs.  Write small functions that you can build larger
-systems with.  When you need an aggregate over a collection, don&amp;rsquo;t create a
-&lt;code&gt;sum&lt;/code&gt; variable and add to it, use a reduction.  Think with values, group those
-values into logical collections, and apply functions across those values by
-thinking in an elemental way.  Think with data.&lt;/p&gt;
 </description>
     </item>
     

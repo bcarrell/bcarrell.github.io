@@ -1,6 +1,6 @@
 ---
 Title: "vim-fireplace + reloaded"
-Date: "2014-05-21"
+Date: "2014-06-24"
 Description: "Techniques for vim-fireplace"
 Tags: ["functional programming", "clojure", "vim"]
 ---

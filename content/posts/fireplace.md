@@ -117,13 +117,31 @@ do `(reset)`, which is essentially a supreme version of `(require ... :reload)`.
 [this is very brittle](https://github.com/clojure/tools.namespace#reloading-code-motivation), and now
 we have all of this awesome Reloaded/Component stuff set up, so let's tie it together with some secret sauce.
 
+First, a helper function, because you'll probably need this a lot:
+
 <figure>
 <figcaption>.vimrc</figcaption>
 {{% highlight clojure %}}
-nnoremap <Leader>fr :call fireplace#session_eval('(user/reset)')<CR>
+function SendToREPL(sexp)
+  call fireplace#session_eval(a:sexp)
+endfunction
 {{% /highlight %}}
 </figure>
 
-Map that to whatever you want, but most importantly, when you have a REPL connected,
-you can now call `(reset)` with a keybind from vim.  We can bind the rest of our useful `user.clj` functions
-similarly by calling `session_eval` with some Clojure code.
+If your vim session is connected to your nrepl session, you can provide `SendToREPL()`
+with any Clojure forms to evaluate them.  If you're not connected, you'll see
+a message like `No live REPL connection`, in which case you can just `:Connect`
+to it.
+
+Now you can start binding forms to various keybinds of your choosing:
+
+<figure>
+<figcaption>.vimrc</figcaption>
+{{% highlight clojure %}}
+nnoremap <Leader>fr :call SendToREPL('(user/reset)')<CR>
+nnoremap <Leader>fg :call SendToREPL('(user/go)')<CR>
+nnoremap <Leader>fs :call SendToREPL('(user/stop)')<CR>
+{{% /highlight %}}
+</figure>
+
+Those are the immediate ones I find useful in this situation, but you may think of others.

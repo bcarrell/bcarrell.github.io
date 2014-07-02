@@ -129,16 +129,34 @@ do &lt;code&gt;(reset)&lt;/code&gt;, which is essentially a supreme version of &
 &lt;a href=&#34;https://github.com/clojure/tools.namespace#reloading-code-motivation&#34;&gt;this is very brittle&lt;/a&gt;, and now
 we have all of this awesome Reloaded/Component stuff set up, so let&amp;rsquo;s tie it together with some secret sauce.&lt;/p&gt;
 
+&lt;p&gt;First, a helper function, because you&amp;rsquo;ll probably need this a lot:&lt;/p&gt;
+
 &lt;figure&gt;
 &lt;figcaption&gt;.vimrc&lt;/figcaption&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;nnoremap&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;Leader&amp;gt;fr&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:call&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fireplace#session_eval(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;user/reset&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;SendToREPL(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;sexp&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;call&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fireplace#session_eval(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:sexp&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;endfunction&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;Map that to whatever you want, but most importantly, when you have a REPL connected,
-you can now call &lt;code&gt;(reset)&lt;/code&gt; with a keybind from vim.  We can bind the rest of our useful &lt;code&gt;user.clj&lt;/code&gt; functions
-similarly by calling &lt;code&gt;session_eval&lt;/code&gt; with some Clojure code.&lt;/p&gt;
+&lt;p&gt;If your vim session is connected to your nrepl session, you can provide &lt;code&gt;SendToREPL()&lt;/code&gt;
+with any Clojure forms to evaluate them.  If you&amp;rsquo;re not connected, you&amp;rsquo;ll see
+a message like &lt;code&gt;No live REPL connection&lt;/code&gt;, in which case you can just &lt;code&gt;:Connect&lt;/code&gt;
+to it.&lt;/p&gt;
+
+&lt;p&gt;Now you can start binding forms to various keybinds of your choosing:&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;figcaption&gt;.vimrc&lt;/figcaption&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;nnoremap&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;Leader&amp;gt;fr&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:call&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;SendToREPL(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;user/reset&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;nnoremap&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;Leader&amp;gt;fg&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:call&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;SendToREPL(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;user/go&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;nnoremap&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;Leader&amp;gt;fs&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;:call&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;SendToREPL(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;user/stop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/figure&gt;
+
+&lt;p&gt;Those are the immediate ones I find useful in this situation, but you may think of others.&lt;/p&gt;
 </description>
     </item>
     

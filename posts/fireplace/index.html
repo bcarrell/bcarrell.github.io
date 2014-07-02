@@ -154,16 +154,34 @@ do <code>(reset)</code>, which is essentially a supreme version of <code>(requir
 <a href="https://github.com/clojure/tools.namespace#reloading-code-motivation">this is very brittle</a>, and now
 we have all of this awesome Reloaded/Component stuff set up, so let&rsquo;s tie it together with some secret sauce.</p>
 
+<p>First, a helper function, because you&rsquo;ll probably need this a lot:</p>
+
 <figure>
 <figcaption>.vimrc</figcaption>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">nnoremap</span> <span style="color: #f8f8f2">&lt;Leader&gt;fr</span> <span style="color: #e6db74">:call</span> <span style="color: #f8f8f2">fireplace#session_eval(</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">user/reset</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">)&lt;CR&gt;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">function</span> <span style="color: #f8f8f2">SendToREPL(</span><span style="color: #a6e22e">sexp</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #f8f8f2">call</span> <span style="color: #f8f8f2">fireplace#session_eval(</span><span style="color: #a6e22e">a</span><span style="color: #e6db74">:sexp</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">endfunction</span>
 </pre></div>
 
 </figure>
 
-<p>Map that to whatever you want, but most importantly, when you have a REPL connected,
-you can now call <code>(reset)</code> with a keybind from vim.  We can bind the rest of our useful <code>user.clj</code> functions
-similarly by calling <code>session_eval</code> with some Clojure code.</p>
+<p>If your vim session is connected to your nrepl session, you can provide <code>SendToREPL()</code>
+with any Clojure forms to evaluate them.  If you&rsquo;re not connected, you&rsquo;ll see
+a message like <code>No live REPL connection</code>, in which case you can just <code>:Connect</code>
+to it.</p>
+
+<p>Now you can start binding forms to various keybinds of your choosing:</p>
+
+<figure>
+<figcaption>.vimrc</figcaption>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">nnoremap</span> <span style="color: #f8f8f2">&lt;Leader&gt;fr</span> <span style="color: #e6db74">:call</span> <span style="color: #f8f8f2">SendToREPL(</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">user/reset</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">)&lt;CR&gt;</span>
+<span style="color: #f8f8f2">nnoremap</span> <span style="color: #f8f8f2">&lt;Leader&gt;fg</span> <span style="color: #e6db74">:call</span> <span style="color: #f8f8f2">SendToREPL(</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">user/go</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">)&lt;CR&gt;</span>
+<span style="color: #f8f8f2">nnoremap</span> <span style="color: #f8f8f2">&lt;Leader&gt;fs</span> <span style="color: #e6db74">:call</span> <span style="color: #f8f8f2">SendToREPL(</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">user/stop</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">&#39;</span><span style="color: #f8f8f2">)&lt;CR&gt;</span>
+</pre></div>
+
+</figure>
+
+<p>Those are the immediate ones I find useful in this situation, but you may think of others.</p>
 </article>
     <aside class="talk">
       <h5>Want to talk about this post? <br/>Send me an <a href="mailto:brandoncarrell@gmail.com">email</a>.</h5>

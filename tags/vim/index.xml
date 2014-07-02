@@ -29,7 +29,7 @@ the startup penalty of the JVM.&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_0&#34;&gt;A Crash Course on Reloaded/Component&lt;/h3&gt;
 
-&lt;p&gt;Start with your &lt;code&gt;project.clj&lt;/code&gt;, like so:&lt;/p&gt;
+&lt;p&gt;Start with a &lt;code&gt;:profiles&lt;/code&gt; key in your &lt;code&gt;project.clj&lt;/code&gt;, like so:&lt;/p&gt;
 
 &lt;figure&gt;
 &lt;figcaption&gt;project.clj&lt;/figcaption&gt;
@@ -40,8 +40,8 @@ the startup penalty of the JVM.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Since you added a &lt;code&gt;dev&lt;/code&gt; source-path in that configuration, include a &lt;code&gt;user.clj&lt;/code&gt;
-file within.  This file will support your fancy new Reloaded/Component workflow
-by including a bunch of functions automatically at REPL startup.&lt;/p&gt;
+file within that directory.  This file will support your fancy new
+Reloaded/Component workflow by including a bunch of functions automatically at REPL startup.&lt;/p&gt;
 
 &lt;figure&gt;
 &lt;figcaption&gt;dev/user.clj&lt;/figcaption&gt;

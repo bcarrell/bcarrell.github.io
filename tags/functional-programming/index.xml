@@ -29,7 +29,7 @@ the startup penalty of the JVM.&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_0&#34;&gt;A Crash Course on Reloaded/Component&lt;/h3&gt;
 
-&lt;p&gt;Start with your &lt;code&gt;project.clj&lt;/code&gt;, like so:&lt;/p&gt;
+&lt;p&gt;Start with a &lt;code&gt;:profiles&lt;/code&gt; key in your &lt;code&gt;project.clj&lt;/code&gt;, like so:&lt;/p&gt;
 
 &lt;figure&gt;
 &lt;figcaption&gt;project.clj&lt;/figcaption&gt;
@@ -40,8 +40,8 @@ the startup penalty of the JVM.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Since you added a &lt;code&gt;dev&lt;/code&gt; source-path in that configuration, include a &lt;code&gt;user.clj&lt;/code&gt;
-file within.  This file will support your fancy new Reloaded/Component workflow
-by including a bunch of functions automatically at REPL startup.&lt;/p&gt;
+file within that directory.  This file will support your fancy new
+Reloaded/Component workflow by including a bunch of functions automatically at REPL startup.&lt;/p&gt;
 
 &lt;figure&gt;
 &lt;figcaption&gt;dev/user.clj&lt;/figcaption&gt;
@@ -157,84 +157,6 @@ to it.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Those are the immediate ones I find useful in this situation, but you may think of others.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Reasons Why a Functional Programmer Might Embrace Go</title>
-      <link>http://bcarrell.me/posts/why_go</link>
-      <pubDate>Wed, 21 May 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://bcarrell.me/posts/why_go</guid>
-      <description>
-
-&lt;p&gt;I believe that functional programming as a paradigm brings a lot of really,
-really important ideas to the table, but if I had to summarize the most
-important reason to adopt a functional programming style it would be:
-functional programming techniques encourage simplicity and an easier way to reason
-about, develop, test, and maintain software.  Predicting the behavior of programs
-is, I would argue, much easier when the program is designed in a functional way.&lt;/p&gt;
-
-&lt;p&gt;Go is an imperative, strongly-typed language.  It doesn&amp;rsquo;t have any applicative
-functional builtins (that means no &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt;, or &lt;code&gt;filter&lt;/code&gt;).  Go programs
-can be pretty verbose as a result.  It doesn&amp;rsquo;t have persistent or immutable
-data structures (something that I find especially crucial today).  I won&amp;rsquo;t lie;
-I feel a little handicapped in some situations.&lt;/p&gt;
-
-&lt;p&gt;Why should a functional programmer consider using Go, after considering all of the
-aforementioned downsides?&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_0&#34;&gt;&lt;strong&gt;1. Standard tooling fosters simplicity&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Functional programs are easier to reason about, but the process of software
-development doesn&amp;rsquo;t stop at the creation and composition of functions.  We need
-to manage tooling, libraries, infrastructure, and deployments.  Go makes all of
-those aspects of &lt;em&gt;delivering&lt;/em&gt; software easier.  Go has a rich, battle-tested
-standard library.&lt;/p&gt;
-
-&lt;p&gt;My third-party dependencies in my Go programs are close to zero, and this is
-encouraged and decided &lt;em&gt;best practice&lt;/em&gt; within the community.  Less is more.&lt;/p&gt;
-
-&lt;p&gt;When writing a Clojure program, and I want to make an http request, I need to
-make a decision: do I reach for &lt;code&gt;clj-http&lt;/code&gt; or &lt;code&gt;http-kit&lt;/code&gt;?  After that, I add my
-choice to my &lt;code&gt;project.clj&lt;/code&gt; and restart my REPL.  With Go, I &lt;code&gt;import net/http&lt;/code&gt;
-and that&amp;rsquo;s it.  I don&amp;rsquo;t need to make a decision, and neither does your team.&lt;/p&gt;
-
-&lt;p&gt;Deployments with Go are dead simple and speedy.  Compilation is lightning fast,
-and my servers don&amp;rsquo;t need dependencies.  Really, all you need is to &lt;code&gt;scp&lt;/code&gt; your
-binary.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_1&#34;&gt;&lt;strong&gt;2. Channels can be transformative pipelines&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Instead of threading data through composed functions, you can thread data
-through channels and pipe output into downstream channels.  This is essentially
-the goal of functional composition: manipulate data through an &amp;lsquo;assembly line&amp;rsquo;
-of functional transformations.  Instead, with Go, you can compose a
-pipeline through a series of channels and transform your data.  It just requires
-thinking about the situation a little differently.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_2&#34;&gt;&lt;strong&gt;3. Functions are first-class&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Yes, functions are first-class.  Go supports higher-order functions, so, yes,
-you can take functions as parameters and return functions.  You can even return
-multiple functions.  It also supports function literals and closures.  You can
-define your own function types.  There&amp;rsquo;s a lot to work with here.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_3&#34;&gt;&lt;strong&gt;4. Interfaces are really great&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;Go interfaces support data-oriented thought: this function takes a &lt;em&gt;thing&lt;/em&gt; (in
-this case an interface) that can take and produce data of the expected types.
-When you use interfaces, you mostly concern yourself with behavior.  Functional
-programmers think in verbs, so interfaces can be an easy transition.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Go is not a functional language, nor does it support the common functional
-applications.  However, the spirit of Go definitely nods in the direction of
-the functional ideal:  simplicity and ease of reasoning.  Software development
-doesn&amp;rsquo;t stop at &lt;code&gt;:wq&lt;/code&gt;, and I think you&amp;rsquo;ll find that Go&amp;rsquo;s idioms and standard
-arsenal support the breadth of the development cycle.  Give it a try; I think
-you&amp;rsquo;ll find that a lot of situations can be solved easily with Go.&lt;/p&gt;
 </description>
     </item>
     
